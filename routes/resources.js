@@ -9,12 +9,12 @@ router.get('/calculateFilter', function(req, res, next) {
    const { exec } = require('child_process');
    //'.\hello.exe'
    //'.\solution_prova\Debug\TestSBFOld.exe'
-    exec('.\\solution_prova\\Debug\\TestSBF.exe .\\solution_prova\\a.csv .\\solution_prova\\b.csv "" "" "" "" "" ', (error, stdout, stderr) => {
+    exec('.\\solution_prova\\Debug\\TestSBF.exe .\\input\\a.csv .\\input\\b.csv "" "" "" "" "" ', (error, stdout, stderr) => {
       if (error) {
         console.error('exec error: '+ error);
         return;
       }
-      console.log(stdout)
+      console.log(stdout);
       res.send('calculate filter completed');
     });
 
