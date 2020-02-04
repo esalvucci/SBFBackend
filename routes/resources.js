@@ -9,12 +9,13 @@ router.get('/calculateFilter', function(req, res, next) {
    const { exec } = require('child_process');
    //'.\hello.exe'
    //'.\solution_prova\Debug\TestSBFOld.exe'
-    exec('.\\solution_prova\\Debug\\TestSBF.exe a.csv b.csv 4 \'\' 0 0 0', (error, stdout, stderr) => {
+    exec('.\\solution_prova\\Debug\\TestSBF.exe .\\solution_prova\\a.csv .\\solution_prova\\b.csv "" "" "" "" "" ', (error, stdout, stderr) => {
       if (error) {
-        console.error('exec error: ${error}');
+        console.error('exec error: '+ error);
         return;
       }
-      res.send('stdout: ${stdout}');
+      console.log(stdout)
+      res.send('calculate filter completed');
     });
 
 });
@@ -28,7 +29,7 @@ router.get('/stats', function(req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('solution_prova/TestSBF/stats19-01-2020-10_21_11.csv', { root: reqPath });
+  res.status(200).sendFile('solution_prova/TestSBF/stats.csv', { root: reqPath });
 });
 
 router.get('/fpr', function(req, res, next) {
@@ -40,7 +41,7 @@ router.get('/fpr', function(req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('solution_prova/TestSBF/fp19-01-2020-10_21_11.csv', { root: reqPath });
+  res.status(200).sendFile('solution_prova/TestSBF/fp.csv', { root: reqPath });
 });
 
 router.get('/isepr', function(req, res, next) {
@@ -52,7 +53,7 @@ router.get('/isepr', function(req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('solution_prova/TestSBF/ise19-01-2020-10_21_11.csv', { root: reqPath });
+  res.status(200).sendFile('solution_prova/TestSBF/ise.csv', { root: reqPath });
 });
 
 module.exports = router;
