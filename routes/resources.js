@@ -18,17 +18,15 @@ var fs = require('fs');
 var busboy = require('connect-busboy');
 app.use(busboy());
 
-router.post('/post', function(req, res) {
-  console.log("aaa");
+router.post('/saveElemDataset', function(req, res) {
   var body = '';
-  filePath = __dirname + '\\..\\input\\data.txt';
-  console.log(filePath);
+  filePath = __dirname + '\\..\\input\\ElemDataset.csv';
   req.on('data', function(data) {
     body += data;
   });
 
   req.on('end', function (){
-    fs.appendFile(filePath, body, function() {
+    fs.writeFile(filePath, body, function() {
       res.end();
     });
   });
