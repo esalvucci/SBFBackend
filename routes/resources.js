@@ -1,64 +1,67 @@
-var express = require('express');
-var path = require('path');
-var router = express.Router();
+const express = require('express');
+const path = require('path');
+const router = express.Router();
 
-const multer = require('multer');
-const csv = require('fast-csv');
-const upload = multer({ dest: 'tmp/csv/' });
+const fs  = require('fs');
 
-const app = express();
-// Express 4.0
-//app.use(bodyParser.json({ limit: '10mb' }));
-//app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
-const bodyParser = require('body-parser');
-app.use(bodyParser.json({ limit: '50mb' })); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+let shaltSetted = false;
 
-var fs = require('fs');
-var busboy = require('connect-busboy');
-app.use(busboy());
+// POST /api/users gets JSON bodies
 
-router.post('/saveElemDataset', function(req, res) {
-  var body = '';
-  filePath = __dirname + '\\..\\input\\ElemDataset.csv';
-  req.on('data', function(data) {
-    body += data;
-  });
+router.post('/save', function (req, res) {
+  //console.log(JSON.parse(req.body.toString()));
+  shaltSetted = false;
+  const json = JSON.parse(JSON.stringify(req.body));
+  const keys = Object.keys(json);
 
-  req.on('end', function (){
-    fs.writeFile(filePath, body, function() {
+  //writeElem
+  let filePath_ = __dirname + '\\..\\input\\ElemDataset.csv';
+  fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
+
+  //writeNonElem
+  filePath_ = __dirname + '\\..\\input\\NonElemDataset.csv';
+  fs.writeFile(filePath_, json[keys[1]], function() { res.end();});
+
+  //writeHashSalt
+  if(json[keys[3]]  !== "") {
+    shaltSetted = true;
+    filePath_ = __dirname + '\\..\\input\\HashSalt.txt';
+    fs.writeFile(filePath_, json[keys[3]], function () {
       res.end();
     });
-  });
-});
+  }
+
+ /* for (let i = 0; i < keys.length; i++) {
+    console.log(json[keys[i]]);
+  }*/
 
 
-router.post('/loadDataset', upload.single('file'), function (req, res, next) {
-  var fileRows = [], fileHeader;
-  console.log("qui");
-  // open uploaded file
-  csv.fromPath(req.file.path)
-      .on("data", function (data) {
-        fileRows.push(data); // push each row
-        console.log(fileRows);
-      })
-      .on("end", function () {
-        fs.unlinkSync(req.file.path);   // remove temp file
-        //process "fileRows"
-      });
+ // res.send('Ok');
+  res.end();
 });
+
+/**************** OLD *************************************/
 
 /* GET users listing. */
 router.get('/calculateFilter', function(req, res, next) {
-
   const { exec } = require('child_process');
-  exec('.\\solution_prova\\Debug\\TestSBF.exe .\\input\\area-element-lindec.csv .\\input\\b.csv "" "" "" "" "" ', (error, stdout, stderr) => {
+
+  let ex = '';
+
+  if(shaltSetted === true){
+    ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" .\\input\\HashSalt.txt "" "" "" '
+  } else {
+    ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" "" "" "" "" '
+  }
+
+  exec(ex, (error, stdout, stderr) => {
     if (error) {
       console.error('exec error: '+ error);
+      res.end();
       return;
     }
     console.log(stdout);
-    res.send('calculate filter completed');
+    res.end();
   });
 
 });

@@ -2,16 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/input/area-element-lindec.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/area-element-unif.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/a.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/area-element-lindec.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/area-element-unif.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/b.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/fp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/fp.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ise.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/stats.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lindec-count.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lininc-count.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-rand-count.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-unif-count.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +75,16 @@
       <workItem from="1580767734672" duration="11000" />
       <workItem from="1580767747304" duration="1286000" />
       <workItem from="1580814328864" duration="3679000" />
-      <workItem from="1580847953810" duration="6745000" />
+      <workItem from="1580847953810" duration="6868000" />
+      <workItem from="1581170825990" duration="2488000" />
+      <workItem from="1581204886157" duration="4405000" />
+      <workItem from="1582145240655" duration="4979000" />
+      <workItem from="1582364716034" duration="3605000" />
+      <workItem from="1582369591926" duration="8718000" />
+      <workItem from="1582384089429" duration="4250000" />
+      <workItem from="1582961622843" duration="7071000" />
+      <workItem from="1583169746021" duration="119000" />
+      <workItem from="1583265526366" duration="6040000" />
     </task>
     <task id="LOCAL-00001" summary="TestSBF.exe updated">
       <created>1580816101588</created>
@@ -87,7 +100,21 @@
       <option name="project" value="LOCAL" />
       <updated>1580816727666</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add post to file loading">
+      <created>1580855476580</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1580855476580</updated>
+    </task>
+    <task id="LOCAL-00004" summary="modifing post methods">
+      <created>1581172586911</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581172586911</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +136,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TestSBF.exe updated" />
     <MESSAGE value="move resources in the right direcotries (input/output)" />
-    <option name="LAST_COMMIT_MESSAGE" value="move resources in the right direcotries (input/output)" />
+    <MESSAGE value="add post to file loading" />
+    <MESSAGE value="modifing post methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifing post methods" />
   </component>
 </project>
