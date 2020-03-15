@@ -4,57 +4,92 @@ const router = express.Router();
 
 const fs  = require('fs');
 
-let shaltSetted = false;
+let elem = '\\..\\input\\ElemDataset.csv';
+let nonElem =  '\\..\\input\\NonElemDataset.csv';
+let hash = "";
+let salt = "";
 
+let ex = '';
 // POST /api/users gets JSON bodies
+
 
 router.post('/save', function (req, res) {
   //console.log(JSON.parse(req.body.toString()));
-  shaltSetted = false;
   const json = JSON.parse(JSON.stringify(req.body));
   const keys = Object.keys(json);
+  ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
 
   //writeElem
-  let filePath_ = __dirname + '\\..\\input\\ElemDataset.csv';
+  let filePath_ = __dirname + elem;
   fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
 
   //writeNonElem
-  filePath_ = __dirname + '\\..\\input\\NonElemDataset.csv';
+  filePath_ = __dirname + nonElem;
   fs.writeFile(filePath_, json[keys[1]], function() { res.end();});
+
+  //hash type
+  hash = json[keys[2]];
+  ex = ex + ' '+ hash;
 
   //writeHashSalt
   if(json[keys[3]]  !== "") {
-    shaltSetted = true;
     filePath_ = __dirname + '\\..\\input\\HashSalt.txt';
     fs.writeFile(filePath_, json[keys[3]], function () {
       res.end();
     });
+    ex = ex + ' .\\input\\HashSalt.txt'
+
+  } else {
+    salt = "";
+    ex = ex + ' ""';
   }
 
- /* for (let i = 0; i < keys.length; i++) {
-    console.log(json[keys[i]]);
-  }*/
+  //p, m ,k
+  let datasetStringArray = json[keys[0]].split('\n');
+  let n = datasetStringArray.length-1;
+  const commandParams = calculateParams( n, json[keys[4]], json[keys[5]], json[keys[6]]);
+  if(commandParams === '') {
+    ex = ex + ' "" "" ""';
+  } else {
+    ex = ex + commandParams;
+  }
 
-
+  console.log('calculated: '+ ex);
  // res.send('Ok');
   res.end();
 });
 
+function calculateParams(n, p, m, k) {
+  if(p===0 && m===0 && k===0){
+    return '';
+  }
+  else if(p!==0 && m===0 && k===0){
+    m = Math.ceil((- n * Math.log(p)) / Math.pow(Math.log(2), 2)); //(int)ceil( (double) ( (double)-n * log(max_fpp)) / pow(log(2), 2));
+    k = Math.ceil((m / n)* Math.log(2)); //(int)ceil((double)(cells / n) * log(2));
+    return " "+ p +" "+ m +" "+ k;
+  }
+  else if(p===0 && m!==0 && k!==0){
+    m = Math.ceil(Math.log2(m)); //fixing input to the nearest power of 2
+    k = Math.ceil((m / n)* Math.log(2)); //recalculating k
+    p = Math.pow(1 - Math.exp(- k / ( m / n)), k); //pow(1 - exp(-k / (m / n)), k)
+    return " "+ p +" "+ m +" "+ k;
+  }
+  else {
+    console.log("Error ("+ p +",  "+ m +",  "+ k+") filter parameters not valid!");
+    return "";
+  }
+}
+
 /**************** OLD *************************************/
 
+
 /* GET users listing. */
-router.get('/calculateFilter', function(req, res, next) {
+router.get('/calculateFilter', function(req, res, _) {
   const { exec } = require('child_process');
 
-  let ex = '';
+  //let ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" .\\input\\HashSalt.txt "" "" "" ';
 
-  if(shaltSetted === true){
-    ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" .\\input\\HashSalt.txt "" "" "" '
-  } else {
-    ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" "" "" "" "" '
-  }
-
-  exec(ex, (error, stdout, stderr) => {
+  exec(ex, (error, stdout, _) => {
     if (error) {
       console.error('exec error: '+ error);
       res.end();
@@ -66,7 +101,7 @@ router.get('/calculateFilter', function(req, res, next) {
 
 });
 
-router.get('/stats', function(req, res, next) {
+router.get('/stats', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'download-' + Date.now() + '.csv\"');
@@ -76,7 +111,7 @@ router.get('/stats', function(req, res, next) {
   res.status(200).sendFile('.\\output\\stats.csv', { root: reqPath });
 });
 
-router.get('/fpr', function(req, res, next) {
+router.get('/fpr', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
 
   res.setHeader('Content-Type', 'text/csv');
@@ -87,7 +122,7 @@ router.get('/fpr', function(req, res, next) {
   res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath });
 });
 
-router.get('/isepr', function(req, res, next) {
+router.get('/isepr', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'download-' + Date.now() + '.csv\"');

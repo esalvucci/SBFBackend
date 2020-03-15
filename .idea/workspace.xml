@@ -3,19 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/a.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/area-element-lindec.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/area-element-unif.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/b.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/SBFHashSalt.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/output/fp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/fp.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ise.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/stats.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.exe" beforeDir="false" afterPath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.pdb" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,19 +28,20 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/output" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\varin\GitHub\SBFBackend\output" />
+      <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova\Debug" />
+      <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\varin\GitHub\SBFBackend\output" />
       <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
       <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
-      <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova\Debug" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -84,7 +80,14 @@
       <workItem from="1582384089429" duration="4250000" />
       <workItem from="1582961622843" duration="7071000" />
       <workItem from="1583169746021" duration="119000" />
-      <workItem from="1583265526366" duration="6040000" />
+      <workItem from="1583265526366" duration="7282000" />
+      <workItem from="1583353322540" duration="54000" />
+      <workItem from="1583353407332" duration="3203000" />
+      <workItem from="1583406194301" duration="615000" />
+      <workItem from="1583696534462" duration="2334000" />
+      <workItem from="1584129457791" duration="5431000" />
+      <workItem from="1584214168498" duration="7903000" />
+      <workItem from="1584309074982" duration="4080000" />
     </task>
     <task id="LOCAL-00001" summary="TestSBF.exe updated">
       <created>1580816101588</created>
@@ -114,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581172586911</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adding parsing json post">
+      <created>1583281793685</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1583281793685</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +148,7 @@
     <MESSAGE value="move resources in the right direcotries (input/output)" />
     <MESSAGE value="add post to file loading" />
     <MESSAGE value="modifing post methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifing post methods" />
+    <MESSAGE value="adding parsing json post" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding parsing json post" />
   </component>
 </project>
