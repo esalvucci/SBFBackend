@@ -60,23 +60,19 @@ router.post('/save', function (req, res) {
 });
 
 function calculateParams(n, p, m, k) {
-  if(p===0 && m===0 && k===0){
+
+  if(p==='' && m==='' && k===''){
     return '';
   }
-  else if(p!==0 && m===0 && k===0){
-    m = Math.ceil((- n * Math.log(p)) / Math.pow(Math.log(2), 2)); //(int)ceil( (double) ( (double)-n * log(max_fpp)) / pow(log(2), 2));
-    k = Math.ceil((m / n)* Math.log(2)); //(int)ceil((double)(cells / n) * log(2));
-    return " "+ p +" "+ m +" "+ k;
+  else if(p!=='' && m==='' && k===''){
+    return ' '+ p + ' "" "" ';  //" "+ p +" "+ m +" "+ k;
   }
-  else if(p===0 && m!==0 && k!==0){
-    m = Math.ceil(Math.log2(m)); //fixing input to the nearest power of 2
-    k = Math.ceil((m / n)* Math.log(2)); //recalculating k
-    p = Math.pow(1 - Math.exp(- k / ( m / n)), k); //pow(1 - exp(-k / (m / n)), k)
-    return " "+ p +" "+ m +" "+ k;
+  else if(p==='' && m!=='' && k!==''){
+    return ' "" '+ m +' '+ k;
   }
   else {
     console.log("Error ("+ p +",  "+ m +",  "+ k+") filter parameters not valid!");
-    return "";
+    return '';
   }
 }
 

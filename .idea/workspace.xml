@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="">
+    <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="fixing chart creation without p,m,k">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/SBFHashSalt.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/output/fp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/fp.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ise.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/stats.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.exe" beforeDir="false" afterPath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.ilk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/TestSBF.pdb" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +25,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/output" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -87,7 +84,9 @@
       <workItem from="1583696534462" duration="2334000" />
       <workItem from="1584129457791" duration="5431000" />
       <workItem from="1584214168498" duration="7903000" />
-      <workItem from="1584309074982" duration="4080000" />
+      <workItem from="1584309074982" duration="5947000" />
+      <workItem from="1584358223184" duration="607000" />
+      <workItem from="1585471627693" duration="4163000" />
     </task>
     <task id="LOCAL-00001" summary="TestSBF.exe updated">
       <created>1580816101588</created>
@@ -124,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583281793685</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixing chart creation without p,m,k">
+      <created>1584314151744</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584314151744</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +155,7 @@
     <MESSAGE value="add post to file loading" />
     <MESSAGE value="modifing post methods" />
     <MESSAGE value="adding parsing json post" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding parsing json post" />
+    <MESSAGE value="fixing chart creation without p,m,k" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing chart creation without p,m,k" />
   </component>
 </project>
