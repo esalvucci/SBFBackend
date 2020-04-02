@@ -4,11 +4,20 @@ const router = express.Router();
 
 const fs  = require('fs');
 
-let elem = '\\..\\input\\ElemDataset.csv';
-let nonElem =  '\\..\\input\\NonElemDataset.csv';
+
+let elem_win = '\\..\\input\\ElemDataset.csv';
+let nonelem_win = '\\..\\input\\NonElemDataset.csv';
+
+let elem_unix = '/../input/ElemDataset.csv';
+let nonelem_unix = '/../input/NonElemDataset.csv';
+
+let elem = elem_unix;
+let nonElem =  nonelem_unix;
 let hash = "";
 let salt = "";
 
+let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
+let ex_unix = './solution_prova/Debug/test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
 let ex = '';
 // POST /api/users gets JSON bodies
 
@@ -17,7 +26,7 @@ router.post('/save', function (req, res) {
   //console.log(JSON.parse(req.body.toString()));
   const json = JSON.parse(JSON.stringify(req.body));
   const keys = Object.keys(json);
-  ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
+  ex = ex_unix;
 
   //writeElem
   let filePath_ = __dirname + elem;
@@ -33,11 +42,13 @@ router.post('/save', function (req, res) {
 
   //writeHashSalt
   if(json[keys[3]]  !== "") {
-    filePath_ = __dirname + '\\..\\input\\HashSalt.txt';
+    //filePath_ = __dirname + '\\..\\input\\HashSalt.txt';
+    filePath_ = __dirname + '/../input/HashSalt.txt';
     fs.writeFile(filePath_, json[keys[3]], function () {
       res.end();
     });
-    ex = ex + ' .\\input\\HashSalt.txt'
+    //ex = ex + ' .\\input\\HashSalt.txt'
+    ex = ex + ' ./input/HashSalt.txt'
 
   } else {
     salt = "";
@@ -104,7 +115,8 @@ router.get('/stats', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('.\\output\\stats.csv', { root: reqPath });
+ // res.status(200).sendFile('.\\output\\stats.csv', { root: reqPath }); win
+  res.status(200).sendFile('./output/stats.csv', { root: reqPath });
 });
 
 router.get('/fpr', function(req, res, _) {
@@ -115,7 +127,8 @@ router.get('/fpr', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath });
+  //res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath }); win
+  res.status(200).sendFile('./output/fp.csv', { root: reqPath });
 });
 
 router.get('/isepr', function(req, res, _) {
@@ -125,7 +138,8 @@ router.get('/isepr', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  res.status(200).sendFile('.\\output\\ise.csv', { root: reqPath });
+  //res.status(200).sendFile('.\\output\\ise.csv', { root: reqPath }); win
+  res.status(200).sendFile('./output/ise.csv', { root: reqPath });
 });
 
 module.exports = router;

@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="fixing chart creation without p,m,k">
+      <change afterPath="$PROJECT_DIR$/solution_prova/Debug/test-app" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/SBFHashSalt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/fp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/fp.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ise.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/stats.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lindec.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lininc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-rand.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-unif.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/elements.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/non-elements.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,15 +27,16 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova\Debug" />
+      <recent name="C:\Users\varin\GitHub\SBFBackend\output" />
+      <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
+      <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\varin\GitHub\SBFBackend\output" />
       <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova\Debug" />
       <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\varin\GitHub\SBFBackend\output" />
-      <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
-      <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -96,7 +86,7 @@
       <workItem from="1584358223184" duration="607000" />
       <workItem from="1585471627693" duration="5095000" />
       <workItem from="1585846767060" duration="141000" />
-      <workItem from="1585848053585" duration="1427000" />
+      <workItem from="1585848053585" duration="3986000" />
     </task>
     <task id="LOCAL-00001" summary="TestSBF.exe updated">
       <created>1580816101588</created>
