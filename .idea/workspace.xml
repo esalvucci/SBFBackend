@@ -8,6 +8,14 @@
       <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ise.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/stats.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lindec.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-lininc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-rand.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/area-element-unif.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/elements.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/dataset/non-elements.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +94,9 @@
       <workItem from="1584214168498" duration="7903000" />
       <workItem from="1584309074982" duration="5947000" />
       <workItem from="1584358223184" duration="607000" />
-      <workItem from="1585471627693" duration="4163000" />
+      <workItem from="1585471627693" duration="5095000" />
+      <workItem from="1585846767060" duration="141000" />
+      <workItem from="1585848053585" duration="1427000" />
     </task>
     <task id="LOCAL-00001" summary="TestSBF.exe updated">
       <created>1580816101588</created>
@@ -130,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584314151744</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixing calculateParams">
+      <created>1585524795259</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1585524795259</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +173,7 @@
     <MESSAGE value="modifing post methods" />
     <MESSAGE value="adding parsing json post" />
     <MESSAGE value="fixing chart creation without p,m,k" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing chart creation without p,m,k" />
+    <MESSAGE value="fixing calculateParams" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing calculateParams" />
   </component>
 </project>
