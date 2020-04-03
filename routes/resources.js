@@ -12,9 +12,9 @@ let hashSalt_win = '\\..\\input\\HashSalt.txt';
 let salt_param_win =  ' .\\input\\HashSalt.txt';
 let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
 
-let elem_unix = '/../input/ElemDataset.csv';
-let nonelem_unix = '/../input/NonElemDataset.csv';
-let hashSalt_unix = '/../input/HashSalt.txt';
+let elem_unix = './input/ElemDataset.csv';
+let nonelem_unix = './input/NonElemDataset.csv';
+let hashSalt_unix = './input/HashSalt.txt';
 let salt_param_unix = ' ./input/HashSalt.txt';
 let ex_unix = './solution_prova/Debug/test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
 

@@ -44,7 +44,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.header("Access-Control-Allow-Origin", "https://varinichiara.github.io");
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  //res.header("Access-Control-Allow-Origin", "http://localhost:4200");
 
   // render the error page
   res.status(err.status || 500);
