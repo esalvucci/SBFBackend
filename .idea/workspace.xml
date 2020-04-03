@@ -4,9 +4,13 @@
     <list default="true" id="5ae7cc3c-b44d-474f-afb4-b44e49182b66" name="Default Changelist" comment="fixing chart creation without p,m,k">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/SBFHashSalt.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/fp.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/ise.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/stats.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_prova/Debug/test-app" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,18 +42,6 @@
       <recent name="C:\Users\varin\GitHub\SBFBackend\input" />
       <recent name="C:\Users\varin\GitHub\SBFBackend\solution_prova" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -167,5 +159,11 @@
     <MESSAGE value="fixing chart creation without p,m,k" />
     <MESSAGE value="fixing calculateParams" />
     <option name="LAST_COMMIT_MESSAGE" value="fixing calculateParams" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="637" y="58" width="645" height="783" key="find.popup" timestamp="1585942268141">
+      <screen x="240" y="0" width="1440" height="900" />
+    </state>
+    <state x="637" y="58" width="645" height="783" key="find.popup/0.900.1920.1080/240.0.1440.900@240.0.1440.900" timestamp="1585942268141" />
   </component>
 </project>

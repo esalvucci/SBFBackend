@@ -16,8 +16,7 @@ let elem_unix = './input/ElemDataset.csv';
 let nonelem_unix = './input/NonElemDataset.csv';
 let hashSalt_unix = './input/HashSalt.txt';
 let salt_param_unix = ' ./input/HashSalt.txt';
-let ex_unix = './solution_prova/Debug/test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
-
+let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
 
 let elem = "";
 let nonElem = "";
@@ -34,12 +33,15 @@ router.post('/save', function (req, res) {
   const keys = Object.keys(json);
 
   if (isWin) {
+    console.log('is win' + isWin);
+
     ex = ex_win;
     elem = elem_win;
     nonElem = nonelem_win;
     saltFile = hashSalt_win;
     hash_salt_par = salt_param_win;
   } else {
+    console.log('is unix' + isWin);
     ex = ex_unix;
     elem = elem_unix;
     nonElem = nonelem_unix;
@@ -137,7 +139,8 @@ router.get('/stats', function(req, res, _) {
   if (isWin) {
     res.status(200).sendFile('.\\output\\stats.csv', {root: reqPath});
   } else {
-    res.status(200).sendFile('./output/stats.csv', {root: reqPath});
+//    res.status(200).sendFile('./output/stats.csv', {root: reqPath});
+    res.status(200).sendFile('./solution_prova/Debug/test-app/output/stats.csv', {root: reqPath});
   }
 });
 
@@ -152,7 +155,7 @@ router.get('/fpr', function(req, res, _) {
   if(isWin) {
     res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath });
   } else {
-    res.status(200).sendFile('./output/fp.csv', {root: reqPath});
+    res.status(200).sendFile('./solution_prova/Debug/test-app/output/fp.csv', {root: reqPath});
   }
 });
 
@@ -166,7 +169,7 @@ router.get('/isepr', function(req, res, _) {
   if(isWin) {
     res.status(200).sendFile('.\\output\\ise.csv', { root: reqPath });
   } else {
-    res.status(200).sendFile('./output/ise.csv', {root: reqPath});
+    res.status(200).sendFile('./solution_prova/Debug/test-app/output/ise.csv', {root: reqPath});
   }
 });
 
