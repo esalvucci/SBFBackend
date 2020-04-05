@@ -12,10 +12,10 @@ let hashSalt_win = '\\..\\input\\HashSalt.txt';
 let salt_param_win =  ' .\\input\\HashSalt.txt';
 let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
 
-let elem_unix = './input/ElemDataset.csv';
-let nonelem_unix = './input/NonElemDataset.csv';
-let hashSalt_unix = './input/HashSalt.txt';
-let salt_param_unix = ' ./input/HashSalt.txt';
+let elem_unix = '/../solution_prova/Debug/test-app/input/ElemDataset.csv';
+let nonelem_unix = '/../solution_prova/Debug/test-app/input/NonElemDataset.csv';
+let hashSalt_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
+let salt_param_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
 let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
 
 let elem = "";
@@ -51,6 +51,7 @@ router.post('/save', function (req, res) {
 
   //writeElem
   let filePath_ = __dirname + elem;
+  console.log(filePath_);
   fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
 
   //writeNonElem
