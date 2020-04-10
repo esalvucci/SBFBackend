@@ -60,7 +60,7 @@ router.post('/save', function (req, res) {
 
   //hash type
   hash = json[keys[2]];
-  ex = ex + ' '+ hash;
+  ex = ex + hash + ' ';
 
   //writeHashSalt
   if(json[keys[3]]  !== "") {
