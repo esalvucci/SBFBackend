@@ -52,11 +52,17 @@ router.post('/save', function (req, res) {
   //writeElem
   let filePath_ = __dirname + elem;
   console.log(filePath_);
-  fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
+  //fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
+  const elemFile = fs.createWriteStream(filePath_);
+  elemFile.write(req.body.elem);
+  elemFile.end();
 
   //writeNonElem
   filePath_ = __dirname + nonElem;
-  fs.writeFile(filePath_, json[keys[1]], function() { res.end();});
+ // fs.writeFile(filePath_, json[keys[1]], function() { res.end();});
+  const nonElemFile = fs.createWriteStream(filePath_);
+  nonElemFile.write(req.body.non_elem);
+  nonElemFile.end();
 
   //hash type
   hash = json[keys[2]];
