@@ -15,8 +15,8 @@ let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\
 let elem_unix = '/../solution_prova/Debug/test-app/input/ElemDataset.csv';
 let nonelem_unix = '/../solution_prova/Debug/test-app/input/NonElemDataset.csv';
 let hashSalt_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
-let salt_param_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
-let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
+let salt_param_unix = './input/HashSalt.txt ';
+let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv ';
 
 let elem = "";
 let nonElem = "";
@@ -82,7 +82,7 @@ router.post('/save', function (req, res) {
   let n = datasetStringArray.length-1;
   const commandParams = calculateParams( n, json[keys[4]], json[keys[5]], json[keys[6]]);
   if(commandParams === '') {
-    ex = ex + ' "" "" ""';
+    ex = ex + '"" "" ""';
   } else {
     ex = ex + commandParams;
   }
