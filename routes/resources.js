@@ -15,7 +15,7 @@ let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\
 let elem_unix = '/../solution_prova/Debug/test-app/input/ElemDataset.csv';
 let nonelem_unix = '/../solution_prova/Debug/test-app/input/NonElemDataset.csv';
 let hashSalt_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
-let salt_param_unix = ' /../solution_prova/Debug/test-app/input/HashSalt.txt ';
+let salt_param_unix = ' ./input/HashSalt.txt ';
 let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv ';
 
 let elem = "";
@@ -104,6 +104,8 @@ router.post('/save', upload, function (req, res) {
 
   const parameters = JSON.parse(req.body.parameters);
   ex = ex + parameters.hash;
+
+  ex = ex + hash_salt_par;
 
   const commandParams = calculateParams( n, parameters.p, parameters.m, parameters.k);
   if(commandParams === '') {
