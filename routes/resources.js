@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
-
+const multer = require('multer');
 const fs  = require('fs');
 
 let isWin = false;
@@ -27,7 +27,19 @@ let ex = '';
 let hash_salt_par = "";
 // POST /api/users gets JSON bodies
 
-router.post('/save', function (req, res) {
+const storage = multer.diskStorage({
+  // destination
+  destination: function (req, file, cb) {
+    cb(null, './solution_prova/Debug/test-app/input/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/save', upload.array("uploads[]", 3), function (req, res) {
   //console.log(JSON.parse(req.body.toString()));
   const json = JSON.parse(JSON.stringify(req.body));
   const keys = Object.keys(json);
