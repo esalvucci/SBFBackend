@@ -15,8 +15,8 @@ let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\
 let elem_unix = '/../solution_prova/Debug/test-app/input/ElemDataset.csv';
 let nonelem_unix = '/../solution_prova/Debug/test-app/input/NonElemDataset.csv';
 let hashSalt_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
-let salt_param_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
-let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv';
+let salt_param_unix = ' /../solution_prova/Debug/test-app/input/HashSalt.txt ';
+let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv ';
 
 let elem = "";
 let nonElem = "";
@@ -29,20 +29,19 @@ let hash_salt_par = "";
 
 const storage = multer.diskStorage({
   // destination
-  destination: function (req, file, cb) {
-    cb(null, './solution_prova/Debug/test-app/input/')
-  },
+  destination: './solution_prova/Debug/test-app/input/',
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }).array("uploads[]", 3);
 
-router.post('/save', upload.array("uploads[]", 3), function (req, res) {
+router.post('/save', upload, function (req, res) {
   //console.log(JSON.parse(req.body.toString()));
-  const json = JSON.parse(JSON.stringify(req.body));
-  const keys = Object.keys(json);
+//  const json = JSON.parse(JSON.stringify(req.body));
+//  const keys = Object.keys(json);
+
 
   if (isWin) {
     console.log('is win' + isWin);
@@ -62,10 +61,14 @@ router.post('/save', upload.array("uploads[]", 3), function (req, res) {
   }
 
   //writeElem
-  let filePath_ = __dirname + elem;
+
+/*  let filePath_ = __dirname + elem;
   console.log(filePath_);
+
+ */
+
 //  fs.writeFile(filePath_, json[keys[0]], function() { res.end();});
-  const elemFile = fs.createWriteStream(filePath_);
+/*  const elemFile = fs.createWriteStream(filePath_);
   elemFile.write(req.body.elem);
   elemFile.end();
 
@@ -84,18 +87,25 @@ router.post('/save', upload.array("uploads[]", 3), function (req, res) {
      fs.writeFile(filePath_, json[keys[3]], function () {
       res.end();
     });
-
-    ex = ex + hash_salt_par;
-
+*/
+/*
   } else {
     salt = "";
     ex = ex + ' ""';
   }
-
+*/
   //p, m ,k
-  let datasetStringArray = json[keys[0]].split('\n');
-  let n = datasetStringArray.length-1;
-  const commandParams = calculateParams( n, json[keys[4]], json[keys[5]], json[keys[6]]);
+//  let datasetStringArray = json[keys[0]].split('\n');
+//  const datasetStringArrayLength = req.files.filter(f => f.originalname === 'ElemDataset.csv').pop().size;
+  const datasetStringArrayLength = 0;
+  let n = datasetStringArrayLength - 1;
+
+  console.log(req.body.parameters);
+
+  const parameters = JSON.parse(req.body.parameters);
+  ex = ex + parameters.hash;
+
+  const commandParams = calculateParams( n, parameters.p, parameters.m, parameters.k);
   if(commandParams === '') {
     ex = ex + ' "" "" ""';
   } else {
@@ -103,16 +113,16 @@ router.post('/save', upload.array("uploads[]", 3), function (req, res) {
   }
 
   console.log('calculated: '+ ex);
- // res.send('Ok');
+//  res.send('Ok');
   res.end();
 });
 
 function calculateParams(n, p, m, k) {
 
-  if(p==='' && m==='' && k===''){
+  if(p === 0 && m === 0 && k === 0){
     return '';
   }
-  else if(p!=='' && m==='' && k===''){
+  else if(p !== 0 && m === 0 && k === 0){
     return ' '+ p + ' "" "" ';  //" "+ p +" "+ m +" "+ k;
   }
   else if(p==='' && m!=='' && k!==''){
