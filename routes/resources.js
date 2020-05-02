@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
+const multer = require('multer');
+const readline = require('readline');
 const router = express.Router();
 
 const fs  = require('fs');
 
 let isWin = true;
+//let execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+let execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
 
 let elem_win = '\\..\\sbf_lib\\input\\ElemDataset.csv';
 let nonelem_win = '\\..\\sbf_lib\\input\\NonElemDataset.csv';
@@ -27,12 +31,23 @@ let ex = '';
 let hash_salt_par = "";
 // POST /api/users gets JSON bodies
 
-router.post('/save', function (req, res) {
-  //console.log(JSON.parse(req.body.toString()));
-  const json = JSON.parse(JSON.stringify(req.body));
-  const keys = Object.keys(json);
+const storage = multer.diskStorage({
+  // destination
+ // destination: './sbf_lib/input/',
+  destination: '..\\sbf_lib\\input\\',
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
 
-  if (isWin) {
+const upload = multer({ storage: storage }).array("uploads[]", 3);
+
+router.post('/save', upload, function (req, res) {
+  // console.log(JSON.parse(req.body.toString()));
+ // const json = JSON.parse(JSON.stringify(req.body));
+ // const keys = Object.keys(json);
+
+ /* if (isWin) {
     console.log('is win');
     ex = ex_win;
     elem = elem_win;
@@ -48,7 +63,9 @@ router.post('/save', function (req, res) {
     saltFile = hashSalt_unix;
     hash_salt_par = salt_param_unix;
   }
+  */
 
+/*
   //writeElem
   let filePath_ = __dirname + elem;
   console.log(filePath_);
@@ -85,19 +102,53 @@ router.post('/save', function (req, res) {
 
   //p, m ,k
   let datasetStringArray = json[keys[0]].split('\n');
-  let n = datasetStringArray.length-1;
-  const commandParams = calculateParams( n, json[keys[4]], json[keys[5]], json[keys[6]]);
-  if(commandParams === '') {
-    ex = ex + '"" "" ""';
-  } else {
-    ex = ex + commandParams;
-  }
 
-  console.log('calculated: '+ ex);
- // res.send('Ok');
-  res.end();
+ */
+
+// caluclate n getting Dataset.csv from filed files of the http request
+
+/*
+  const datasetStringArrayLength = req.files.filter(f => f.originalname === 'ElemDataset.csv').pop() !== undefined ?
+      req.files.filter(f => f.originalname === 'ElemDataset.csv').pop().size : 0;
+  let n = datasetStringArrayLength - 1;
+*/
+
+
+  const countLinesInFile = require('count-lines-in-file');
+  const path = require('path');
+  const targetFilePath = path.resolve(__dirname, '..\\sbf_lib\\input\\ElemDataset.csv');
+
+  countLinesInFile(targetFilePath, (error, n) => {  // n = numberOfLines of ElemDataset.csv
+
+    const parameters = JSON.parse(req.body.parameters);
+
+    if (parameters.hash !== undefined) {
+      execArguments.push('\'' + parameters.hash + '\'');
+    } else {
+      execArguments.push('\'' + 4 + '\'');
+    }
+
+    req.files.filter(f => f.originalname === 'HashSalt.txt').pop() !== undefined ?
+        execArguments.push('.\\..\\sbf_lib\\input\\HashSalt.txt') :    //  execArguments.push('./input/HashSalt.txt'); unix!!
+        execArguments.push(' "" ');
+
+    if (parameters.p !== 0) {
+      execArguments.push('\'' + parameters.p + '\'');
+    } else {execArguments.push(' "" ');}
+    if (parameters.m !== 0) {
+      execArguments.push('\'' + parameters.m + '\'');
+    } else {execArguments.push(' "" ');}
+    if (parameters.k !== 0) {
+      execArguments.push('\'' + parameters.k + '\'');
+    } else {execArguments.push(' "" ');}
+
+    res.end();
+
+  });
+
 });
 
+/*
 function calculateParams(n, p, m, k) {
 
   if(p==='' && m==='' && k===''){
@@ -114,15 +165,16 @@ function calculateParams(n, p, m, k) {
     return '';
   }
 }
+*/
 
 /**************** GET *************************************/
 
 
 /* GET users listing. */
 router.get('/calculateFilter', function(req, res, _) {
-  const { exec } = require('child_process');
+ /* const { exec } = require('child_process');
 
-  let ex = '.\\..\\sbf_lib\\TestSBF.exe .\\..\\sbf_lib\\input\\ElemDataset.csv .\\..\\sbf_lib\\input\\NonElemDataset.csv "" .\\..\\sbf_lib\\input\\HashSalt.txt "" "" "" ';
+ // let ex = '.\\..\\sbf_lib\\TestSBF.exe .\\..\\sbf_lib\\input\\ElemDataset.csv .\\..\\sbf_lib\\input\\NonElemDataset.csv "" .\\..\\sbf_lib\\input\\HashSalt.txt "" "" "" ';
 
   //ex = '..\\sbf_lib\\Hello.exe';
   //ex = "dir";
@@ -134,6 +186,33 @@ router.get('/calculateFilter', function(req, res, _) {
       return;
     }
     console.log(stdout);
+    res.end();
+  });
+*/
+
+  cmd = './test-app';
+ // cmd = '.\\..\\sbf_lib\\TestSBF.exe';
+  cmd = '.\\TestSBF.exe';
+  const { spawn } = require('child_process');
+  console.log(execArguments);
+  const testapp = spawn(cmd, execArguments,
+      {cwd: '..\\sbf_lib', shell: true}).on('error', function( err ){ console.log(err); throw err });
+
+  //execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+  execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
+
+  testapp.stdout.on('data', (data) => {
+    console.log(`${data}`);  // SBF output
+  });
+
+  testapp.on('error', function(err) {
+    console.log('Failed to start child process.');
+    console.log(err);
+  });
+
+  testapp.on('exit', (code) => {
+    console.log(`Child process exited with exit code ${code}`);
+    res.status(200);
     res.end();
   });
 
