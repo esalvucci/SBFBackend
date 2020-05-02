@@ -4,19 +4,19 @@ const router = express.Router();
 
 const fs  = require('fs');
 
-let isWin = false;
+let isWin = true;
 
-let elem_win = '\\..\\input\\ElemDataset.csv';
-let nonelem_win = '\\..\\input\\NonElemDataset.csv';
-let hashSalt_win = '\\..\\input\\HashSalt.txt';
-let salt_param_win =  ' .\\input\\HashSalt.txt';
-let ex_win = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv';
+let elem_win = '\\..\\sbf_lib\\input\\ElemDataset.csv';
+let nonelem_win = '\\..\\sbf_lib\\input\\NonElemDataset.csv';
+let hashSalt_win = '\\..\\sbf_lib\\input\\HashSalt.txt';
+let salt_param_win =  ' .\\sbf_lib\\input\\HashSalt.txt ';
+let ex_win = '.\\sbf_lib\\TestSBF.exe .\\sbf_lib\\input\\ElemDataset.csv .\\sbf_lib\\input\\NonElemDataset.csv ';
 
-let elem_unix = '/../solution_prova/Debug/test-app/input/ElemDataset.csv';
-let nonelem_unix = '/../solution_prova/Debug/test-app/input/NonElemDataset.csv';
-let hashSalt_unix = '/../solution_prova/Debug/test-app/input/HashSalt.txt';
+let elem_unix = '/../solution_prova/test-app/input/ElemDataset.csv';
+let nonelem_unix = '/../solution_prova/test-app/input/NonElemDataset.csv';
+let hashSalt_unix = '/../solution_prova/test-app/input/HashSalt.txt';
 let salt_param_unix = './input/HashSalt.txt ';
-let ex_unix = 'cd solution_prova/Debug/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv ';
+let ex_unix = 'cd solution_prova/test-app/ && ./test-app ./input/ElemDataset.csv ./input/NonElemDataset.csv ';
 
 let elem = "";
 let nonElem = "";
@@ -33,15 +33,15 @@ router.post('/save', function (req, res) {
   const keys = Object.keys(json);
 
   if (isWin) {
-    console.log('is win' + isWin);
-
+    console.log('is win');
     ex = ex_win;
     elem = elem_win;
     nonElem = nonelem_win;
     saltFile = hashSalt_win;
     hash_salt_par = salt_param_win;
+
   } else {
-    console.log('is unix' + isWin);
+    console.log('is unix');
     ex = ex_unix;
     elem = elem_unix;
     nonElem = nonelem_unix;
@@ -80,7 +80,7 @@ router.post('/save', function (req, res) {
 
   } else {
     salt = "";
-    ex = ex + ' ""';
+    ex = ex + '"" ';
   }
 
   //p, m ,k
@@ -122,7 +122,10 @@ function calculateParams(n, p, m, k) {
 router.get('/calculateFilter', function(req, res, _) {
   const { exec } = require('child_process');
 
-  //let ex = '.\\solution_prova\\Debug\\TestSBF.exe .\\input\\ElemDataset.csv .\\input\\NonElemDataset.csv "" .\\input\\HashSalt.txt "" "" "" ';
+  let ex = '.\\..\\sbf_lib\\TestSBF.exe .\\..\\sbf_lib\\input\\ElemDataset.csv .\\..\\sbf_lib\\input\\NonElemDataset.csv "" .\\..\\sbf_lib\\input\\HashSalt.txt "" "" "" ';
+
+  //ex = '..\\sbf_lib\\Hello.exe';
+  //ex = "dir";
 
   exec(ex, (error, stdout, _) => {
     if (error) {
@@ -143,12 +146,12 @@ router.get('/stats', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  if (isWin) {
-    res.status(200).sendFile('.\\output\\stats.csv', {root: reqPath});
-  } else {
+//  if (isWin) {
+//    res.status(200).sendFile('.\\output\\stats.csv', {root: reqPath});
+//  } else {
 //    res.status(200).sendFile('./output/stats.csv', {root: reqPath});
-    res.status(200).sendFile('./solution_prova/Debug/test-app/output/stats.csv', {root: reqPath});
-  }
+    res.status(200).sendFile('./sbf_lib/output/stats.csv', {root: reqPath});
+  //}
 });
 
 router.get('/fpr', function(req, res, _) {
@@ -159,11 +162,11 @@ router.get('/fpr', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  if(isWin) {
-    res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath });
-  } else {
-    res.status(200).sendFile('./solution_prova/Debug/test-app/output/fp.csv', {root: reqPath});
-  }
+ // if(isWin) {
+ //   res.status(200).sendFile('.\\output\\fp.csv', { root: reqPath });
+ // } else {
+    res.status(200).sendFile('./sbf_lib/output/fp.csv', {root: reqPath});
+ // }
 });
 
 router.get('/isepr', function(req, res, _) {
@@ -173,11 +176,11 @@ router.get('/isepr', function(req, res, _) {
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
 
-  if(isWin) {
-    res.status(200).sendFile('.\\output\\ise.csv', { root: reqPath });
-  } else {
-    res.status(200).sendFile('./solution_prova/Debug/test-app/output/ise.csv', {root: reqPath});
-  }
+  // if(isWin) {
+  //  res.status(200).sendFile('.\\output\\ise.csv', { root: reqPath });
+  // } else {
+    res.status(200).sendFile('./sbf_lib/output/ise.csv', {root: reqPath});
+  //}
 });
 
 module.exports = router;
