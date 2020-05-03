@@ -4,16 +4,20 @@ const multer = require('multer');
 const router = express.Router();
 
 let isWin = false;
-//let execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
-let execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
-
+let execArguments;
+let uploadDestination;
+if (isWin) {
+    execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
+    uploadDestination = '..\\sbf_lib\\input\\';
+} else {
+    execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+    uploadDestination = 'sbf_lib/test-app/input';
+}
 
 // POST /api/users gets JSON bodies
-
 const storage = multer.diskStorage({
   // destination
- // destination: './sbf_lib/input/',
-  destination: 'sbf_lib/test-app/input',
+  destination: uploadDestination,
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
@@ -26,7 +30,6 @@ const upload = multer({ storage: storage }).array("uploads[]", 3);
  * It saves the parameters sent from the client
  */
 router.post('/save', upload, function (req, res) {
-
     const parameters = JSON.parse(req.body.parameters);
 
     if (parameters.hash !== undefined) {
@@ -37,7 +40,8 @@ router.post('/save', upload, function (req, res) {
 
     req.files.filter(f => f.originalname === 'HashSalt.txt').pop() !== undefined ?
         //  execArguments.push('./input/HashSalt.txt'); unix!!
-        execArguments.push('./input/HashSalt.txt') :
+        isWin ? execArguments.push('.\\..\\sbf_lib\\input\\HashSalt.txt') :
+                execArguments.push('./input/HashSalt.txt') :
         execArguments.push(' "" ');
 
     if (parameters.p !== 0) {
@@ -59,15 +63,21 @@ router.post('/save', upload, function (req, res) {
  * It computes the SBF filter using the paramenter setting in the /save API
  */
 router.get('/calculateFilter', function(req, res, _) {
-  cmd = './test-app';
- // cmd = '.\\..\\sbf_lib\\TestSBF.exe';
-//  cmd = '.\\TestSBF.exe';
+  let command;
+  let currentWorkingDirectory;
+  if (isWin) {
+      command = '.\\TestSBF.exe';
+      currentWorkingDirectory = '..\\sbf_lib';
+  } else {
+      command = './test-app';
+      currentWorkingDirectory = './sbf_lib/test-app';
+  }
 
   //cmd = '.\\TestSBF.exe .\\..\\sbf_lib\\input\\ElemDataset.csv\ .\\..\\sbf_lib\\input\\NonElemDataset.csv 4 "" "" "" "" ';
   const { spawn } = require('child_process');
   console.log(execArguments);
-  const testapp = spawn(cmd, execArguments,
-      {cwd: './sbf_lib/test-app', shell: true}).on('error', function( err ){ console.log(err); throw err });
+  const testapp = spawn(command, execArguments,
+      {cwd: currentWorkingDirectory, shell: true}).on('error', function( err ){ console.log(err); throw err });
 
 
   testapp.stdout.on('data', (data) => {
@@ -81,8 +91,12 @@ router.get('/calculateFilter', function(req, res, _) {
 
   testapp.on('exit', (code) => {
     console.log(`Child process exited with exit code ${code}`);
-    //execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
-    execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+
+      if (isWin) {
+          execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
+      } else {
+          execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+      }
     res.status(200);
     res.end();
   });
@@ -94,11 +108,12 @@ router.get('/calculateFilter', function(req, res, _) {
  */
 router.get('/stats', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
+  let filePath = isWin ? '.\\sbf_lib\\output\\stats.csv' : 'sbf_lib/test-app/output/stats.csv';
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'download-' + Date.now() + '.csv\"');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
-  res.status(200).sendFile('sbf_lib/test-app/output/stats.csv', {root: reqPath});
+  res.status(200).sendFile(filePath, {root: reqPath});
 });
 
 /**
@@ -106,12 +121,12 @@ router.get('/stats', function(req, res, _) {
  */
 router.get('/fpr', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
-
+  let filePath = isWin ? '.\\sbf_lib\\output\\fp.csv' : 'sbf_lib/test-app/output/fp.csv';
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'download-' + Date.now() + '.csv\"');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
-  res.status(200).sendFile('sbf_lib/test-app/output/fp.csv', {root: reqPath});
+  res.status(200).sendFile(filePath, {root: reqPath});
 });
 
 /**
@@ -119,11 +134,12 @@ router.get('/fpr', function(req, res, _) {
  */
 router.get('/isepr', function(req, res, _) {
   let reqPath = path.join(__dirname, '../');
+  let fileName = isWin ? '.\\sbf_lib\\output\\ise.csv' : 'sbf_lib/test-app/output/ise.csv';
   res.setHeader('Content-Type', 'text/csv');
   res.setHeader('Content-Disposition', 'attachment; filename=\"' + 'download-' + Date.now() + '.csv\"');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Pragma', 'no-cache');
-  res.status(200).sendFile('sbf_lib/test-app/output/ise.csv', {root: reqPath});
+  res.status(200).sendFile(fileName, {root: reqPath});
 });
 
 module.exports = router;
