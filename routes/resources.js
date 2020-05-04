@@ -7,10 +7,10 @@ let isWin = false;
 let execArguments;
 let uploadDestination;
 if (isWin) {
-    execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
+    execArguments = ['.\\sbf_lib\\TestSBF.exe', '.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
     uploadDestination = '..\\sbf_lib\\input\\';
 } else {
-    execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+    execArguments = ['cd sbf_lib/test-app && ./test-app', './input/ElemDataset.csv', './input/NonElemDataset.csv'];
     uploadDestination = 'sbf_lib/test-app/input';
 }
 
@@ -64,43 +64,29 @@ router.post('/save', upload, function (req, res) {
  */
 router.get('/calculateFilter', function(req, res, _) {
   let command;
-  let currentWorkingDirectory;
-  if (isWin) {
-      command = '.\\TestSBF.exe';
-      currentWorkingDirectory = '..\\sbf_lib';
-  } else {
-      command = './test-app';
-      currentWorkingDirectory = './sbf_lib/test-app';
-  }
+// let currentWorkingDirectory;
 
+  execArguments = execArguments.join(' ');
   //cmd = '.\\TestSBF.exe .\\..\\sbf_lib\\input\\ElemDataset.csv\ .\\..\\sbf_lib\\input\\NonElemDataset.csv 4 "" "" "" "" ';
-  const { spawn } = require('child_process');
+  const { exec } = require('child_process');
   console.log(execArguments);
-  const testapp = spawn(command, execArguments,
-      {cwd: currentWorkingDirectory, shell: true}).on('error', function( err ){ console.log(err); throw err });
 
+  exec(execArguments, (err, stdout, stderr) => {
+        if (err) {
+            console.error(`exec error: ${err}`);
+            return;
+        }
 
-  testapp.stdout.on('data', (data) => {
-    console.log(`${data}`);  // SBF output
-  });
-
-  testapp.on('error', function(err) {
-    console.log('Failed to start child process.');
-    console.log(err);
-  });
-
-  testapp.on('exit', (code) => {
-    console.log(`Child process exited with exit code ${code}`);
+        console.log(`${stdout}`);
 
       if (isWin) {
-          execArguments = ['.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
+          execArguments = ['.\\sbf_lib\\TestSBF.exe', '.\\..\\sbf_lib\\input\\ElemDataset.csv', '.\\..\\sbf_lib\\input\\NonElemDataset.csv'];
       } else {
-          execArguments = ['./input/ElemDataset.csv', './input/NonElemDataset.csv'];
+          execArguments = ['cd sbf_lib/test-app && ./test-app', './input/ElemDataset.csv', './input/NonElemDataset.csv'];
       }
-    res.status(200);
-    res.end();
+      res.status(200);
+      res.end();
   });
-
 });
 
 /**
